@@ -298,6 +298,8 @@ const CSS_HANDLES = [
   'reviewComment',
   'reviewCommentRating',
   'reviewCommentUser',
+  'reviewNameUser',
+  'reviewText',
   'graphContent',
   'graphContainer',
   'graphText',
@@ -629,37 +631,43 @@ function Reviews() {
                           {review.title}
                         </span>
                       </div>
-                      <ul className="pa0 mv2 t-small">
-                        {review.verifiedPurchaser ? (
-                          <li className="dib mr5">
-                            <IconSuccess />{' '}
-                            <FormattedMessage id="store/reviews.list.verifiedPurchaser" />
+                      <div className={`${handles.reviewNameUser}`}>
+                        <ul className="pa0 mv2 t-small">
+                          {review.verifiedPurchaser ? (
+                            <li className="dib mr5">
+                              <IconSuccess />{' '}
+                              <FormattedMessage id="store/reviews.list.verifiedPurchaser" />
+                            </li>
+                          ) : null}
+                          <li className="dib mr2">
+                            <FormattedMessage id="store/reviews.list.submitted" />{' '}
+                            <strong>{getTimeAgo(review.reviewDateTime)}</strong>
                           </li>
-                        ) : null}
-                        <li className="dib mr2">
-                          <FormattedMessage id="store/reviews.list.submitted" />{' '}
-                          <strong>{getTimeAgo(review.reviewDateTime)}</strong>
-                        </li>
-                        <li className="dib mr5">
-                          <FormattedMessage id="store/reviews.list.by" />{' '}
-                          <strong>
-                            {review.reviewerName ||
-                              intl.formatMessage(messages.anonymous)}
-                          </strong>
-                          {state.settings &&
-                            state.settings.useLocation &&
-                            review.location && <span>, {review.location}</span>}
-                        </li>
-                      </ul>
-                      <div className="t-body lh-copy mw9">
-                        <ShowMore
-                          lines={3}
-                          more="Show more"
-                          less="Show less"
-                          anchorClass=""
+                          <li className="dib mr5">
+                            <FormattedMessage id="store/reviews.list.by" />{' '}
+                            <strong>
+                              {review.reviewerName ||
+                                intl.formatMessage(messages.anonymous)}
+                            </strong>
+                            {state.settings &&
+                              state.settings.useLocation &&
+                              review.location && (
+                                <span>, {review.location}</span>
+                              )}
+                          </li>
+                        </ul>
+                        <div
+                          className={`${handles.reviewText} t-body lh-copy mw9`}
                         >
-                          {review.text}
-                        </ShowMore>
+                          <ShowMore
+                            lines={3}
+                            more="Show more"
+                            less="Show less"
+                            anchorClass=""
+                          >
+                            {review.text}
+                          </ShowMore>
+                        </div>
                       </div>
                     </div>
                   ) : (

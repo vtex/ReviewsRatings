@@ -102,6 +102,8 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `reviewCommentRating`     |
 | `reviewCommentsContainer` |
 | `reviewCommentUser`       |
+| `reviewNameUser`          |
+| `reviewText`              |
 | `reviewsHeading`          |
 | `reviewsRating`           |
 | `reviewsRatingAverage`    |
